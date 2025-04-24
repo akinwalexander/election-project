@@ -87,3 +87,7 @@ def get_polling_units(request):
     ward_id = request.GET.get('ward_id')
     polling_units = PollingUnit.objects.filter(ward_id=ward_id).order_by('polling_unit_name')
     return render(request, 'polling_unit_dropdown.html', {'polling_units': polling_units})
+
+def home(request):
+    """Simple home page view"""
+    return render(request, 'home.html')
