@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Summed Results by LGA</h2>
+    
+    <form method="post" class="mb-4">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="lga_id">Select LGA:</label>
+            <select name="lga_id" id="lga_id" class="form-control" required>
+                <option value="">-- Select LGA --</option>
+                {% for lga in lgas %}
+                <option value="{{ lga.lga_id }}" {% if selected_lga and selected_lga.lga_id == lga.lga_id %}selected{% endif %}>
+                    {{ lga.lga_name }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Show Results</button>
+    </form>
+    
+    {% if selected_lga %}
+    <div class="card">
+        <div class="card-header">
+            <h3>Summed Results for {{ selected_lga.lga_name }}</h3>
+        </div>
+        <div class="card-body">
+            {% if summed_results %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Party</th>
+                        <th>Total Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for result in summed_results %}
+                    <tr>
+                        <td>{{ result.party_abbreviation }}</td>
+                        <td>{{ result.total_score }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p>No results found for this LGA.</p>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Polling Unit Results</h2>
+    <div class="card mb-4">
+        <div class="card-header">
+            <h3>{{ polling_unit.polling_unit_name }}</h3>
+        </div>
+        <div class="card-body">
+            <p><strong>Polling Unit ID:</strong> {{ polling_unit.polling_unit_id }}</p>
+            <p><strong>Ward:</strong> {{ polling_unit.ward.ward_name }}</p>
+            <p><strong>LGA:</strong> {{ polling_unit.lga.lga_name }}</p>
+            
+            <h4 class="mt-4">Results</h4>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Party</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for result in results %}
+                    <tr>
+                        <td>{{ result.party_abbreviation }}</td>
+                        <td>{{ result.party_score }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <a href="{% url 'lga_summed_results' %}" class="btn btn-secondary">View LGA Results</a>
+</div>
+{% endblock %}

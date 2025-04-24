@@ -1,0 +1,4 @@
+<option value="">-- Select Ward --</option>
+{% for ward in wards %}
+<option value="{{ ward.uniqueid }}">{{ ward.ward_name }}</option>
+{% endfor %}

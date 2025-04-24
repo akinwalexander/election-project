@@ -1,0 +1,4 @@
+<option value="">-- Select Polling Unit --</option>
+{% for pu in polling_units %}
+<option value="{{ pu.uniqueid }}">{{ pu.polling_unit_name }} (ID: {{ pu.polling_unit_id }})</option>
+{% endfor %}
